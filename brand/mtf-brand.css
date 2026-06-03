@@ -1,0 +1,196 @@
+/* ==========================================================================
+   MTF – Moss Transportforum · Brand set
+   Kilde: offisiell profilmanual (brand/MTF-profilmanual.pdf).
+   Brukes av jubileumsmateriell (MTF 40 år) og MTF-web.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* --- Hovedfarger (profilmanual) -------------------------------------- */
+  --mtf-blue:        #004d9d;  /* MTF Blå · PMS 2728C · primær             */
+  --mtf-blue-dark:   #003a78;  /* hover / dyp blå                          */
+  --mtf-blue-tint:   #e6eef7;  /* lys blå flate                           */
+  --mtf-red:         #ff0000;  /* MTF Rød · PMS 185C · aksent              */
+  --mtf-red-dark:    #a31a16;  /* Rød Mechrite · hover på rød             */
+
+  /* --- Sekundærpalett (profilmanual) ----------------------------------- */
+  --mtf-calico:      #4d63ab;  /* Blå Calico                              */
+  --mtf-marble:      #8388a8;  /* Blå Marble                              */
+  --mtf-gray:        #c6c6c6;  /* Grå                                     */
+  --mtf-thyme:       #c7c5ac;  /* Grønn Thyme                             */
+  --mtf-palm:        #afa852;  /* Grønn Palm                              */
+  --mtf-oliven:      #c0bb09;  /* Grønn Oliven                            */
+  --mtf-mechrite:    #a31a16;  /* Rød Mechrite                            */
+
+  /* Jubileum / bærekraft-aksent — bruker offisiell Grønn Palm */
+  --mtf-green:       #afa852;
+  --mtf-green-dark:  #8a8440;
+  --mtf-green-tint:  #f0efdf;
+
+  /* --- Nøytraler ------------------------------------------------------- */
+  --mtf-ink:         #1d252b;  /* brødtekst                               */
+  --mtf-dark:        #243140;  /* mørk flate (footer)                     */
+  --mtf-muted:       #5b6671;
+  --mtf-line:        #d9dee3;
+  --mtf-bg:          #f4f6f8;
+  --mtf-white:       #ffffff;
+
+  /* --- Typografi (profilmanual) ---------------------------------------- */
+  --mtf-font-head: 'Signika', 'Segoe UI', Arial, Helvetica, sans-serif;  /* titler */
+  --mtf-font-body: 'Lora', Georgia, 'Times New Roman', serif;            /* brødtekst */
+  --mtf-font-num:  'Helvetica Neue', Helvetica, Arial, sans-serif;       /* tall */
+
+  /* --- Skala / form ---------------------------------------------------- */
+  --mtf-radius:      10px;
+  --mtf-radius-sm:   6px;
+  --mtf-shadow:      0 6px 24px rgba(29, 37, 43, .10);
+  --mtf-shadow-sm:   0 2px 8px rgba(29, 37, 43, .08);
+  --mtf-maxw:        1080px;
+
+  --mtf-space-1: 4px;  --mtf-space-2: 8px;  --mtf-space-3: 12px;
+  --mtf-space-4: 16px; --mtf-space-5: 24px; --mtf-space-6: 32px;
+  --mtf-space-7: 48px; --mtf-space-8: 64px;
+}
+
+/* --- Basis ------------------------------------------------------------- */
+.mtf,
+body.mtf {
+  margin: 0;
+  font-family: var(--mtf-font-body);
+  color: var(--mtf-ink);
+  background: var(--mtf-bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mtf h1, .mtf h2, .mtf h3, .mtf h4 {
+  font-family: var(--mtf-font-head);
+  color: var(--mtf-blue);
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0 0 var(--mtf-space-4);
+}
+.mtf h1 { font-size: clamp(2rem, 4.5vw, 3.1rem); font-weight: 700; }
+.mtf h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+.mtf h3 { font-size: 1.2rem; }
+.mtf p  { margin: 0 0 var(--mtf-space-4); }
+.mtf a  { color: var(--mtf-blue); }
+
+/* Tall settes i Helvetica jf. profilmanual (Typografi tall) */
+.mtf-num { font-family: var(--mtf-font-num); font-feature-settings: "tnum" 1; }
+
+.mtf-container { max-width: var(--mtf-maxw); margin: 0 auto; padding: 0 var(--mtf-space-5); }
+
+/* --- Etikett / tag ----------------------------------------------------- */
+.mtf-tag {
+  display: inline-block;
+  font-family: var(--mtf-font-head);
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mtf-white);
+  background: var(--mtf-red);
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+.mtf-tag--blue  { background: var(--mtf-blue); }
+.mtf-tag--green { background: var(--mtf-green); color: var(--mtf-ink); }
+
+/* --- Kort -------------------------------------------------------------- */
+.mtf-card {
+  background: var(--mtf-white);
+  border: 1px solid var(--mtf-line);
+  border-radius: var(--mtf-radius);
+  box-shadow: var(--mtf-shadow-sm);
+  padding: var(--mtf-space-6);
+}
+
+/* --- Knapper ----------------------------------------------------------- */
+.mtf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mtf-space-2);
+  font-family: var(--mtf-font-head);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 14px 26px;
+  border: 2px solid transparent;
+  border-radius: var(--mtf-radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s ease, border-color .15s ease, transform .05s ease;
+}
+.mtf-btn:active { transform: translateY(1px); }
+.mtf-btn--primary { background: var(--mtf-blue); color: var(--mtf-white); }
+.mtf-btn--primary:hover { background: var(--mtf-blue-dark); }
+.mtf-btn--accent  { background: var(--mtf-red); color: var(--mtf-white); }
+.mtf-btn--accent:hover { background: var(--mtf-red-dark); }
+.mtf-btn--ghost {
+  background: transparent;
+  color: var(--mtf-blue);
+  border-color: var(--mtf-blue);
+}
+.mtf-btn--ghost:hover { background: var(--mtf-blue-tint); }
+
+/* --- Skjemafelt -------------------------------------------------------- */
+.mtf-field { margin-bottom: var(--mtf-space-5); }
+.mtf-label {
+  display: block;
+  font-family: var(--mtf-font-head);
+  font-weight: 600;
+  color: var(--mtf-blue);
+  margin-bottom: var(--mtf-space-2);
+}
+.mtf-label .mtf-optional {
+  font-weight: 400;
+  color: var(--mtf-muted);
+  font-size: .85rem;
+}
+.mtf-input,
+.mtf-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--mtf-font-body);
+  font-size: 1rem;
+  color: var(--mtf-ink);
+  background: var(--mtf-white);
+  border: 1.5px solid var(--mtf-line);
+  border-radius: var(--mtf-radius-sm);
+  padding: 12px 14px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.mtf-input:focus,
+.mtf-textarea:focus {
+  outline: none;
+  border-color: var(--mtf-blue);
+  box-shadow: 0 0 0 3px var(--mtf-blue-tint);
+}
+.mtf-textarea { min-height: 96px; resize: vertical; }
+
+/* --- Valg (radio som kort) -------------------------------------------- */
+.mtf-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mtf-space-3);
+  border: 1.5px solid var(--mtf-line);
+  border-radius: var(--mtf-radius-sm);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.mtf-choice:hover { border-color: var(--mtf-blue); background: var(--mtf-blue-tint); }
+.mtf-choice input { margin-top: 3px; accent-color: var(--mtf-blue); }
+.mtf-choice--selected,
+.mtf-choice:has(input:checked) {
+  border-color: var(--mtf-blue);
+  background: var(--mtf-blue-tint);
+}
+
+/* --- Hjelpere ---------------------------------------------------------- */
+.mtf-muted { color: var(--mtf-muted); }
+.mtf-center { text-align: center; }
+[hidden] { display: none !important; }
