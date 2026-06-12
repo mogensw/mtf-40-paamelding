@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTF 40 år – Påmelding</title>
+<link rel="stylesheet" href="brand/mtf-brand.css">
+<style>
+  /* Sidespecifikk layout — bygger på MTFs brand-tokens */
+  .top { background: #ffffff; border-bottom: 1px solid var(--mtf-line); }
+  .top .mtf-container { display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px; }
+  .top img { height: 44px; }
+  .top .date { color: var(--mtf-blue); font-family:var(--mtf-font-head); font-weight:600; font-size:.95rem; }
+
+  .hero {
+    background: linear-gradient(180deg, #004d9d, #003a78);
+    color:#fff;
+    padding: var(--mtf-space-8) 0;
+  }
+  .hero .mtf-tag { background: var(--mtf-red); }
+  .hero h1 { color:#fff; max-width: 760px; }
+  .hero p { color:#dce4ee; max-width: 620px; font-size:1.12rem; }
+
+  .layout { max-width: var(--mtf-maxw); margin: -40px auto 0; padding: 0 var(--mtf-space-5) var(--mtf-space-8); display:grid; grid-template-columns: 1.05fr 1fr; gap: var(--mtf-space-6); align-items:start; }
+  @media (max-width: 860px){ .layout { grid-template-columns:1fr; margin-top:-24px; } }
+
+  .events .ev { display:flex; gap:16px; padding: 18px 0; border-bottom:1px solid var(--mtf-line); }
+  .events .ev:last-child { border-bottom:0; }
+  .ev .when { flex:0 0 84px; font-family:var(--mtf-font-head); font-weight:700; color:var(--mtf-blue); }
+  .ev h3 { margin:0 0 4px; }
+  .ev p { margin:0; color:var(--mtf-gray); font-size:.95rem; }
+
+  .form-card h2 { margin-top:0; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap: var(--mtf-space-4); }
+  @media (max-width:520px){ .grid2 { grid-template-columns:1fr; } }
+  fieldset { border:0; margin:0 0 var(--mtf-space-5); padding:0; }
+  fieldset legend { padding:0; }
+  .choices { display:grid; gap:10px; margin-top:8px; }
+
+  /* Betaling */
+  .vipps-badge { display:inline-block; font-family:var(--mtf-font-head); font-weight:700; font-size:.72rem;
+                 letter-spacing:.04em; color:#fff; background:#ff5b24; padding:2px 8px; border-radius:5px;
+                 vertical-align:middle; margin-left:6px; }
+  .pay-extra { margin-top:12px; padding:14px 16px; border:1px dashed var(--mtf-line);
+               border-radius:var(--mtf-radius-sm); background:var(--mtf-bg); }
+  .pay-extra .mtf-field:last-child { margin-bottom:0; }
+
+  .confirm { text-align:center; padding: var(--mtf-space-6) var(--mtf-space-4); }
+  .confirm .mark { width:64px; height:64px; border-radius:50%; background:var(--mtf-green-tint); color:var(--mtf-green-dark); display:flex; align-items:center; justify-content:center; margin:0 auto var(--mtf-space-4); font-size:34px; }
+  .err { color: var(--mtf-red-dark); font-size:.85rem; margin-top:6px; }
+
+  .siteft { background:var(--mtf-navy); color:#9aa6b3; text-align:center; padding: var(--mtf-space-6) 0; font-size:.9rem; }
+</style>
+</head>
+<body class="mtf">
+
+  <!-- Toppstripe -->
+  <div class="top">
+    <div class="mtf-container">
+      <img src="brand/assets/mtf-logo.png" alt="Moss Transportforum">
+      <span class="date">Fredag 11. september 2026</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="mtf-container">
+      <span class="mtf-tag">MTF 40 år</span>
+      <h1 style="margin-top:16px">MTF 40 år – påmelding</h1>
+      <p>Velkommen til Moss Transportforums 40-årsjubileum! Fredag 11. september inviterer vi til en dag med
+         både faglig innhold og feiring. Du kan delta på dagarrangementet hos oss i Vålerveien 157,
+         jubileumskvelden på Moss Samfunnshus, eller begge deler.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- Arrangementoversikt -->
+    <section class="mtf-card events" aria-label="Arrangementoversikt">
+      <h2>Arrangementoversikt</h2>
+      <div class="ev">
+        <div class="when">Dagtid<br><span class="mtf-muted" style="font-weight:400;font-size:.85rem">kl. 14.00</span></div>
+        <div>
+          <h3>Moss Transportforum, Vålerveien 157</h3>
+          <p>Faglig program, presentasjoner og åpning av det nye energianlegget.</p>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="when">Kveld<br><span class="mtf-muted" style="font-weight:400;font-size:.85rem">kl. 18.30</span></div>
+        <div>
+          <h3>Moss Samfunnshus, Storsalen</h3>
+          <p>Jubileumsmiddag og feiring av 40 år.</p>
+        </div>
+      </div>
+      <p class="mtf-muted" style="margin:18px 0 0;font-size:.9rem">
+        Spørsmål? Ta kontakt med oss — vi sender program og praktisk informasjon nærmere arrangementet.
+      </p>
+    </section>
+
+    <!-- Påmeldingsskjema -->
+    <section class="mtf-card form-card">
+      <form id="paamelding" novalidate>
+        <h2>Påmeldingsskjema</h2>
+
+        <fieldset>
+          <legend class="mtf-label" style="font-size:1.05rem">Dine opplysninger</legend>
+          <div class="grid2">
+            <div class="mtf-field" style="margin-bottom:0">
+              <label class="mtf-label" for="fornavn">Fornavn</label>
+              <input class="mtf-input" id="fornavn" name="fornavn" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="mtf-field" style="margin-bottom:0">
+              <label class="mtf-label" for="etternavn">Etternavn</label>
+              <input class="mtf-input" id="etternavn" name="etternavn" type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="mtf-field" style="margin-top:16px;margin-bottom:0">
+            <label class="mtf-label" for="epost">E-postadresse</label>
+            <input class="mtf-input" id="epost" name="epost" type="email" autocomplete="email" placeholder="navn@firma.no" required>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="mtf-label" style="font-size:1.05rem">Jeg ønsker å delta på</legend>
+          <div class="choices" role="radiogroup">
+            <label class="mtf-choice">
+              <input type="radio" name="deltakelse" value="Dagtid" required>
+              <span><strong>Dagtid</strong> – hos Moss Transportforum<br><span class="mtf-muted">Vålerveien 157, fra kl. 14.00</span></span>
+            </label>
+            <label class="mtf-choice">
+              <input type="radio" name="deltakelse" value="Kveldsarrangement">
+              <span><strong>Kveldsarrangement</strong> – Moss Samfunnshus<br><span class="mtf-muted">Storsalen, fra kl. 18.30</span></span>
+            </label>
+            <label class="mtf-choice">
+              <input type="radio" name="deltakelse" value="Begge deler">
+              <span><strong>Begge deler</strong><br><span class="mtf-muted">Dagtid + kveldsarrangement</span></span>
+            </label>
+          </div>
+          <div class="err" id="err-deltakelse" hidden>Velg hva du ønsker å delta på.</div>
+        </fieldset>
+
+        <div class="mtf-field">
+          <label class="mtf-label" for="firma">Firma / organisasjon <span class="mtf-optional">(valgfritt – anbefalt)</span></label>
+          <input class="mtf-input" id="firma" name="firma" type="text" autocomplete="organization">
+        </div>
+
+        <!-- Betaling -->
+        <fieldset>
+          <legend class="mtf-label" style="font-size:1.05rem">Betaling</legend>
+          <p class="mtf-muted" style="margin:0 0 4px;font-size:.88rem">Velg hvordan du vil betale egenandelen. Beløp bekreftes i påmeldingsbekreftelsen.</p>
+          <div class="choices" role="radiogroup">
+            <label class="mtf-choice">
+              <input type="radio" name="betaling" value="Faktura" required>
+              <span><strong>Faktura</strong><br><span class="mtf-muted">Sendes på e-post eller EHF til firma</span></span>
+            </label>
+            <label class="mtf-choice">
+              <input type="radio" name="betaling" value="Vipps">
+              <span><strong>Vipps</strong><span class="vipps-badge">Vipps</span><br><span class="mtf-muted">Betal til Vipps-nummer <strong class="mtf-num">82718</strong></span></span>
+            </label>
+          </div>
+          <div class="err" id="err-betaling" hidden>Velg betalingsmåte.</div>
+
+          <!-- Betingede felt: Faktura -->
+          <div class="pay-extra" id="pay-faktura" hidden>
+            <div class="grid2">
+              <div class="mtf-field" style="margin-bottom:0">
+                <label class="mtf-label" for="fakturaref">Fakturareferanse / bestiller <span class="mtf-optional">(valgfritt)</span></label>
+                <input class="mtf-input" id="fakturaref" name="fakturaref" type="text" autocomplete="off">
+              </div>
+              <div class="mtf-field" style="margin-bottom:0">
+                <label class="mtf-label" for="orgnr">Org.nr <span class="mtf-optional">(EHF – valgfritt)</span></label>
+                <input class="mtf-input mtf-num" id="orgnr" name="orgnr" type="text" inputmode="numeric" autocomplete="off" placeholder="9 siffer">
+              </div>
+            </div>
+            <div class="mtf-field" style="margin-top:14px">
+              <label class="mtf-label" for="fakturaadr">Fakturaadresse <span class="mtf-optional">(valgfritt)</span></label>
+              <input class="mtf-input" id="fakturaadr" name="fakturaadr" type="text" autocomplete="street-address">
+            </div>
+          </div>
+
+          <!-- Betingede felt: Vipps -->
+          <div class="pay-extra" id="pay-vipps" hidden>
+            <p style="margin:0 0 6px"><strong>Slik betaler du med Vipps</strong></p>
+            <p class="mtf-muted" style="margin:0;font-size:.92rem">
+              Åpne Vipps-appen, velg <em>Betale</em> og søk opp Vipps-nummer
+              <strong class="mtf-num" style="color:var(--mtf-blue)">82718</strong> (Moss Transportforum).
+              Betal egenandelen og <strong>merk betalingen med navnet ditt</strong>.
+            </p>
+          </div>
+        </fieldset>
+
+        <div class="mtf-field">
+          <label class="mtf-label" for="hensyn">Eventuelle allergier eller hensyn <span class="mtf-optional">(valgfritt – anbefalt)</span></label>
+          <textarea class="mtf-textarea" id="hensyn" name="hensyn" placeholder="F.eks. allergier, tilgjengelighet, andre behov"></textarea>
+        </div>
+
+        <button type="submit" class="mtf-btn mtf-btn--primary" style="width:100%">Meld meg på</button>
+        <p class="mtf-muted mtf-center" style="font-size:.82rem;margin:14px 0 0">
+          Mockup – ingen data sendes, ingen reell betaling. Påmeldingen lagres ikke.
+        </p>
+      </form>
+
+      <!-- Bekreftelse -->
+      <div class="confirm" id="bekreftelse" hidden>
+        <div class="mark">✓</div>
+        <h2>Takk for din påmelding!</h2>
+        <p id="bekreftelse-betaling"></p>
+        <p>Vi sender deg mer informasjon og program for dagen nærmere arrangementet.</p>
+        <p class="mtf-muted" id="bekreftelse-detalj"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="siteft">
+    Moss Transportforum · Vålerveien 157, Moss · Effektiv transport og logistikk over hele Norge
+  </footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('paamelding');
+    var confirm = document.getElementById('bekreftelse');
+    var errDelt = document.getElementById('err-deltakelse');
+    var errBet  = document.getElementById('err-betaling');
+    var payFaktura = document.getElementById('pay-faktura');
+    var payVipps = document.getElementById('pay-vipps');
+
+    // Vis/skjul betingede felt etter valgt betalingsmåte
+    form.querySelectorAll('input[name="betaling"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        errBet.hidden = true;
+        payFaktura.hidden = (r.value !== 'Faktura');
+        payVipps.hidden   = (r.value !== 'Vipps');
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errDelt.hidden = true; errBet.hidden = true;
+
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var deltakelse = form.querySelector('input[name="deltakelse"]:checked');
+      if (!deltakelse) {
+        errDelt.hidden = false;
+        errDelt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      var betaling = form.querySelector('input[name="betaling"]:checked');
+      if (!betaling) {
+        errBet.hidden = false;
+        errBet.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      var fornavn = document.getElementById('fornavn').value.trim();
+      var betText = (betaling.value === 'Vipps')
+        ? 'Betal egenandelen til Vipps-nummer 82718 (Moss Transportforum), og merk betalingen med navnet ditt.'
+        : 'Faktura for egenandelen sendes til oppgitt e-post/firma.';
+
+      document.getElementById('bekreftelse-betaling').textContent = betText;
+      document.getElementById('bekreftelse-detalj').textContent =
+        'Registrert: ' + fornavn + ' · ' + deltakelse.value + ' · Betaling: ' + betaling.value + '.';
+
+      form.hidden = true;
+      confirm.hidden = false;
+      confirm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+</script>
+</body>
+</html>
