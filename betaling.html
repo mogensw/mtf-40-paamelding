@@ -44,6 +44,10 @@
   .pay-extra { margin-top:12px; padding:14px 16px; border:1px dashed var(--mtf-line);
                border-radius:var(--mtf-radius-sm); background:var(--mtf-bg); }
   .pay-extra .mtf-field:last-child { margin-bottom:0; }
+  .price-row { display:flex; align-items:center; justify-content:space-between; gap:12px;
+               background:var(--mtf-blue-tint); border-radius:var(--mtf-radius-sm);
+               padding:12px 16px; margin:4px 0 10px; font-family:var(--mtf-font-head); }
+  .price-row .price { font-weight:700; font-size:1.35rem; color:var(--mtf-blue); }
 
   .confirm { text-align:center; padding: var(--mtf-space-6) var(--mtf-space-4); }
   .confirm .mark { width:64px; height:64px; border-radius:50%; background:var(--mtf-green-tint); color:var(--mtf-green-dark); display:flex; align-items:center; justify-content:center; margin:0 auto var(--mtf-space-4); font-size:34px; }
@@ -147,7 +151,11 @@
         <!-- Betaling -->
         <fieldset>
           <legend class="mtf-label" style="font-size:1.05rem">Betaling</legend>
-          <p class="mtf-muted" style="margin:0 0 4px;font-size:.88rem">Velg hvordan du vil betale egenandelen. Beløp bekreftes i påmeldingsbekreftelsen.</p>
+          <div class="price-row">
+            <span>Egenandel per deltaker</span>
+            <span class="price mtf-num">kr 429,-</span>
+          </div>
+          <p class="mtf-muted" style="margin:0 0 4px;font-size:.88rem">Velg hvordan du vil betale egenandelen.</p>
           <div class="choices" role="radiogroup">
             <label class="mtf-choice">
               <input type="radio" name="betaling" value="Faktura" required>
@@ -256,8 +264,8 @@
 
       var fornavn = document.getElementById('fornavn').value.trim();
       var betText = (betaling.value === 'Vipps')
-        ? 'Betal egenandelen til Vipps-nummer 82718 (Moss Transportforum), og merk betalingen med navnet ditt.'
-        : 'Faktura for egenandelen sendes til oppgitt e-post/firma.';
+        ? 'Betal kr 429,- til Vipps-nummer 82718 (Moss Transportforum), og merk betalingen med navnet ditt.'
+        : 'Faktura på kr 429,- for egenandelen sendes til oppgitt e-post/firma.';
 
       document.getElementById('bekreftelse-betaling').textContent = betText;
       document.getElementById('bekreftelse-detalj').textContent =
