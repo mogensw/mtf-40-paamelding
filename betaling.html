@@ -151,22 +151,34 @@
         <!-- Betaling -->
         <fieldset>
           <legend class="mtf-label" style="font-size:1.05rem">Betaling</legend>
-          <div class="price-row">
-            <span>Egenandel per deltaker</span>
-            <span class="price mtf-num">kr 429,-</span>
+
+          <p class="mtf-muted" id="betaling-hint" style="margin:0;font-size:.9rem">Velg deltakelse over for å se betaling.</p>
+
+          <!-- Vises kun ved kveldsarrangement / begge deler -->
+          <div id="betaling-content" hidden>
+            <div class="price-row">
+              <span>Egenandel – kveldsarrangement</span>
+              <span class="price mtf-num">kr 429,-</span>
+            </div>
+            <p class="mtf-muted" style="margin:0 0 8px;font-size:.85rem">Gjelder kun kveldsarrangementet. Dagtid er gratis.</p>
+            <p class="mtf-muted" style="margin:0 0 4px;font-size:.88rem">Velg hvordan du vil betale egenandelen.</p>
+            <div class="choices" role="radiogroup">
+              <label class="mtf-choice">
+                <input type="radio" name="betaling" value="Faktura">
+                <span><strong>Faktura</strong><br><span class="mtf-muted">Sendes på e-post eller EHF til firma</span></span>
+              </label>
+              <label class="mtf-choice">
+                <input type="radio" name="betaling" value="Vipps">
+                <span><strong>Vipps</strong><span class="vipps-badge">Vipps</span><br><span class="mtf-muted">Betal til Vipps-nummer <strong class="mtf-num">82718</strong></span></span>
+              </label>
+            </div>
+            <div class="err" id="err-betaling" hidden>Velg betalingsmåte.</div>
           </div>
-          <p class="mtf-muted" style="margin:0 0 4px;font-size:.88rem">Velg hvordan du vil betale egenandelen.</p>
-          <div class="choices" role="radiogroup">
-            <label class="mtf-choice">
-              <input type="radio" name="betaling" value="Faktura" required>
-              <span><strong>Faktura</strong><br><span class="mtf-muted">Sendes på e-post eller EHF til firma</span></span>
-            </label>
-            <label class="mtf-choice">
-              <input type="radio" name="betaling" value="Vipps">
-              <span><strong>Vipps</strong><span class="vipps-badge">Vipps</span><br><span class="mtf-muted">Betal til Vipps-nummer <strong class="mtf-num">82718</strong></span></span>
-            </label>
+
+          <!-- Vises kun ved Dagtid -->
+          <div class="pay-extra" id="betaling-gratis" hidden>
+            <strong>Dagtid er gratis</strong> – ingen egenandel. Du trenger ikke velge betalingsmåte.
           </div>
-          <div class="err" id="err-betaling" hidden>Velg betalingsmåte.</div>
 
           <!-- Betingede felt: Faktura -->
           <div class="pay-extra" id="pay-faktura" hidden>
@@ -232,6 +244,31 @@
     var errBet  = document.getElementById('err-betaling');
     var payFaktura = document.getElementById('pay-faktura');
     var payVipps = document.getElementById('pay-vipps');
+    var betHint = document.getElementById('betaling-hint');
+    var betContent = document.getElementById('betaling-content');
+    var betGratis = document.getElementById('betaling-gratis');
+
+    // Egenandel gjelder kun kveldsarrangement
+    function feeApplies() {
+      var d = form.querySelector('input[name="deltakelse"]:checked');
+      return !!d && (d.value === 'Kveldsarrangement' || d.value === 'Begge deler');
+    }
+
+    // Oppdater betalingsseksjon etter valgt deltakelse
+    form.querySelectorAll('input[name="deltakelse"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        errDelt.hidden = true; errBet.hidden = true;
+        var fee = feeApplies();
+        betHint.hidden = true;
+        betContent.hidden = !fee;
+        betGratis.hidden = fee;
+        if (!fee) {
+          // Dagtid: nullstill betalingsvalg
+          form.querySelectorAll('input[name="betaling"]').forEach(function (b) { b.checked = false; });
+          payFaktura.hidden = true; payVipps.hidden = true;
+        }
+      });
+    });
 
     // Vis/skjul betingede felt etter valgt betalingsmåte
     form.querySelectorAll('input[name="betaling"]').forEach(function (r) {
@@ -255,21 +292,28 @@
         return;
       }
 
+      var fee = feeApplies();
       var betaling = form.querySelector('input[name="betaling"]:checked');
-      if (!betaling) {
+      if (fee && !betaling) {
         errBet.hidden = false;
         errBet.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
 
       var fornavn = document.getElementById('fornavn').value.trim();
-      var betText = (betaling.value === 'Vipps')
-        ? 'Betal kr 429,- til Vipps-nummer 82718 (Moss Transportforum), og merk betalingen med navnet ditt.'
-        : 'Faktura på kr 429,- for egenandelen sendes til oppgitt e-post/firma.';
+      var betText;
+      if (!fee) {
+        betText = 'Dagtid er gratis – ingen egenandel.';
+      } else if (betaling.value === 'Vipps') {
+        betText = 'Betal kr 429,- til Vipps-nummer 82718 (Moss Transportforum), og merk betalingen med navnet ditt.';
+      } else {
+        betText = 'Faktura på kr 429,- for egenandelen sendes til oppgitt e-post/firma.';
+      }
 
+      var betLinje = fee ? (' · Betaling: ' + betaling.value) : ' · gratis';
       document.getElementById('bekreftelse-betaling').textContent = betText;
       document.getElementById('bekreftelse-detalj').textContent =
-        'Registrert: ' + fornavn + ' · ' + deltakelse.value + ' · Betaling: ' + betaling.value + '.';
+        'Registrert: ' + fornavn + ' · ' + deltakelse.value + betLinje + '.';
 
       form.hidden = true;
       confirm.hidden = false;
